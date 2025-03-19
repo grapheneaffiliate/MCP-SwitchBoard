@@ -115,7 +115,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact 📧
 
-For questions or feedback, please contact [grapheneaffiliate@example.com](mailto:grapheneaffiliate@example.com).
+For questions or feedback, please contact [grapheneaffiliates@gmail.com](mailto:grapheneaffiliates@gmail.com).
 
 ## Show Your Support ❤️
 
