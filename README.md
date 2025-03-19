@@ -6,8 +6,6 @@ A GUI MCP Switchboard for managing multiple Model Context Protocol (MCP) servers
 
 MCP SwitchBoard is a user-friendly interface that allows you to control and monitor different MCP servers, configure services, and execute tasks seamlessly. It provides a central hub for managing your MCP ecosystem, making it easier to interact with various tools and data sources.
 
-![MCP SwitchBoard Dashboard](./images/mcp-switchboard-dashboard.png)
-
 ## Features ✨
 
 *   **Intuitive GUI:** A graphical user interface for managing MCP servers.
