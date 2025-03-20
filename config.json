@@ -1,0 +1,28 @@
+{
+  "servers": [
+    {
+      "id": 1,
+      "name": "GitHub MCP Server",
+      "host": "localhost",
+      "port": 8001,
+      "type": "github",
+      "apiKey": "github_api_key"
+    },
+    {
+      "id": 2,
+      "name": "Playwright MCP Server",
+      "host": "localhost",
+      "port": 8002,
+      "type": "playwright",
+      "apiKey": "playwright_api_key"
+    },
+    {
+      "id": 3,
+      "name": "API MCP Server",
+      "host": "localhost",
+      "port": 8003,
+      "type": "api",
+      "apiKey": "api_mcp_key"
+    }
+  ]
+}

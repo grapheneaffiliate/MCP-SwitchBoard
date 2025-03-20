@@ -1,124 +1,158 @@
-# MCP SwitchBoard 🎛️
+# MCP Switchboard
 
-A GUI MCP Switchboard for managing multiple Model Context Protocol (MCP) servers and their associated tools.
+**A dashboard for managing and monitoring Model Context Protocol (MCP) servers.**
 
-## Overview 🌟
+This application provides a user interface to connect, manage, and monitor MCP servers. It allows users to execute tools provided by MCP servers and monitor their metrics in real-time.
 
-MCP SwitchBoard is a user-friendly interface that allows you to control and monitor different MCP servers, configure services, and execute tasks seamlessly. It provides a central hub for managing your MCP ecosystem, making it easier to interact with various tools and data sources.
+## Features
 
-![MCP SwitchBoard Dashboard](./images/mcp-switchboard-dashboard.png)
+- **Server Management**: Connect to and disconnect from MCP servers.
+- **Task Execution**: Execute tools provided by connected MCP servers.
+- **Metrics Monitoring**: View system and server metrics in real-time.
 
-## Features ✨
+## Running the Application
 
-*   **Intuitive GUI:** A graphical user interface for managing MCP servers.
-*   **Server Management:** Add, remove, connect, and disconnect MCP servers.
-*   **Task Execution:** Execute commands and scripts on selected MCP servers.
-*   **Real-time Monitoring:** Monitor server performance metrics (CPU, RAM, Disk, Network).
-*   **Authentication & Security:** Secure access with user authentication.
-*   **Scalability Features:** Placeholder for Redis caching and RabbitMQ/Kafka integration.
+### Backend
 
-## Getting Started 🚀
+1. Install dependencies:
+   ```
+   cd mcp-switchboard
+   pip install -r backend/requirements.txt
+   ```
 
-### Prerequisites
+2. Start the backend server:
+   ```
+   cd mcp-switchboard
+   py run_backend.py
+   ```
+   
+   If the above doesn't work, try:
+   ```
+   python3 run_backend.py
+   ```
+   
+   Or directly with uvicorn:
+   ```
+   cd mcp-switchboard
+   uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+   ```
 
-*   Python 3.7+
-*   Node.js 12+
-*   uvicorn
-*   pip
-*   create-react-app
+### Frontend
 
-### Installation
+1. Install dependencies:
+   ```
+   cd mcp-switchboard/frontend
+   npm install
+   ```
 
-1.  Clone the repository:
+2. Start the frontend development server:
+   ```
+   cd mcp-switchboard/frontend
+   npm start
+   ```
 
-    ```bash
-    git clone https://github.com/grapheneaffiliate/MCP-SwitchBoard.git
-    cd MCP-SwitchBoard
-    ```
+3. Access the UI at http://localhost:9877
 
-2.  Set up the backend:
+## Architecture
 
-    ```bash
-    cd backend
-    py -m venv venv
-    .\venv\Scripts\activate
-    pip install -r requirements.txt
-    ```
+- Backend: FastAPI with SQLAlchemy for database operations
+- Frontend: React with WebSocket for real-time communication
+- Communication: WebSocket for real-time updates and REST API for direct operations
 
-3.  Set up the frontend:
+## Configuration
 
-    ```bash
-    cd ../frontend
-    npm install
-    ```
+The application's configuration is managed through `config.json` file located in the root directory. This file includes settings for database connections, MCP server configurations, and other application-wide parameters.
 
-### Running the Application
+Example `config.json`:
+```json
+{
+  "database_url": "sqlite:///./mcp.db",
+  "mcp_servers": {
+    "example-server": {
+      "command": "node",
+      "args": ["/path/to/example-mcp-server/index.js"],
+      "env": {
+        "SERVER_API_KEY": "your_api_key"
+      }
+    }
+  }
+}
+```
 
-1.  Start the backend:
+- **database_url**: Specifies the URL for the SQLite database.
+- **mcp_servers**: Defines the configuration for each MCP server that the Switchboard can manage. Each server configuration includes:
+    - **command**: The command to execute to start the MCP server.
+    - **args**: An array of command-line arguments for the server.
+    - **env**: Environment variables to be set when starting the server.
 
-    ```bash
-    cd backend
-    .\venv\Scripts\activate
-    uvicorn main:app --reload
-    ```
+Ensure to configure this file according to your environment and the MCP servers you intend to manage.
 
-2.  Start the frontend:
+## Implementation Details
 
-    ```bash
-    cd frontend
-    npm start
-    ```
+The MCP Switchboard consists of several key components:
 
-Open your browser and navigate to `http://localhost:3000` to access the MCP SwitchBoard.
+1. **Server Management**:
+   - Configuration stored in config.json
+   - Database models for MCP servers
+   - Connection/disconnection functionality
 
-## Functionality ⚙️
+2. **Task Execution**:
+   - Command execution via WebSocket
+   - Real-time console output display
 
-### Adding a Server
+3. **Metrics Monitoring**:
+   - System metrics collection
+   - Server-specific metrics collection
+   - Real-time updates via WebSocket
 
-1.  Click on the "Add Server" button.
-2.  Enter the server details (Name, IP Address, Port).
-3.  Click "Save" to add the server to the dashboard.
+## Getting Started
 
-### Connecting to a Server
+To run the MCP Switchboard application, follow these steps:
 
-1.  Locate the server block on the dashboard.
-2.  Click the "Connect" button to establish a connection.
+### Backend
 
-### Executing a Task
+1. Navigate to the backend directory:
+   ```
+   cd backend
+   ```
 
-1.  Select a server from the dashboard.
-2.  Enter the command in the "Task Execution" panel.
-3.  Click "Execute" to run the command on the selected server.
+2. Install backend dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-### Monitoring Server Metrics
+3. Run the backend server:
+   ```
+   py main.py
+   ```
+   or
+   ```
+   uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+   ```
 
-1.  View the "Server Metrics" section to see real-time performance data.
-    *   CPU Usage
-    *   RAM Usage
-    *   Disk Usage
-    *   Network Activity
+### Frontend
 
-## Future Plans 🔮
+1. Navigate to the frontend directory:
+   ```
+   cd frontend
+   ```
 
-*   Implement full OAuth 2.0 and RBAC for enhanced security.
-*   Integrate Redis caching for improved performance.
-*   Incorporate RabbitMQ/Kafka for asynchronous task execution.
-*   Add support for more MCP server types.
-*   Develop a plugin system for extending functionality.
-*   Create a mobile app for remote monitoring and control.
+2. Install frontend dependencies:
+   ```
+   npm install
+   ```
 
-## Contributing 🤝
+3. Start the frontend development server:
+   ```
+   npm start
+   ```
 
-We welcome contributions from the community! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to get involved.
+4. Access the UI at http://localhost:9877
 
-## License 📜
+## Development
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The application is designed to be easily extensible. The backend uses a modular architecture with separate modules for different functionality, and the frontend is built with React components that can be reused and extended.
 
-## Contact 📧
+## Contributing
 
-For questions or feedback, please contact [grapheneaffiliates@gmail.com](mailto:grapheneaffiliates@gmail.com).
-
-## Show Your Support ❤️
-
-If you find this project helpful, please consider starring the repository! ⭐
+Contributions are welcome! Please feel free to submit pull requests to improve the MCP Switchboard. For major changes, please open an issue first to discuss what you would like to change.
